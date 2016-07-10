@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="store">
+	<head >
+		<link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+		<script type="text/javascript" src="ui-bootstrap-tpls-0.14.3.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	
+		
+	
+	<body ng-controller="StoreController" >	
+			<header>
+				<p class="menu home"  ng-click="menu()">Home</p>
+				<p class="menu track" ng-click="menu()">Track Order</p>
+				<p class="menu login" ng-click="menu()">Login</p>
+				<img class="displayed" src = "logo-Mazda.png" alt="logo" >
+				<p class="menu bottom home"  ng-click="menu()">Wallet</p>
+				<p class="menu bottom track" ng-click="menu()">WishList</p>
+				<p class="menu bottom login" ng-click="viewCart()">Cart</p>
+				<h1 class = "text-center"> MAKE ONE </h1>	
+				
+			</header>
+		
+		<!--div class="text-right">
+			<button class="btn btn-small btn-danger" ng-model="btnadd" ng-click="viewCart()">View Cart</button> 
+		</div-->
+		<h3 class="primary bold" font color="red">{{successMsg}}  {{store.prod.length}}</h3>
+		
+		
+		<div class = "list-group" >
+			<div ui-view>
+			<div class = "list-group-item" ng-repeat = "product in products | limitTo:2 | orderBy:'-price'">
+					
+				<h3 style="font-size:40px;font-weight:bold;color:grey;">
+					{{product.name | uppercase}}
+				</h3>		
+			<section ng-show="product.images.length">
+				<img ng-src="{{product.images[0]}}" />
+				<h3> </h3>
+				<button class="btn btn-small btn-danger" ng-model="btnadd" id="addbtn" ng-click="addToCart(product)">Add To Cart</button> 
+				<h3 class="price">{{product.price | currency}}</h3>
+				<button class="btn btn-small btn-primary" ng-model="btnbuy" ng-click="buy(product)">BUY NOW</button> 
+					
+				<ul class="list-inline thumbs">
+					<li class="thumbnail" ng-repeat="image in product.images">
+						<img ng-src="{{image}}" />
+					</li>
+				</ul>
+				
+			</section>
+			
+			<section ng-controller = "PanelController as panel">
+				<ul class = "nav nav-pills" >
+					<li ng-class = "{active:panel.isSelected(1)}"> 
+						<a href ng-click="panel.selecttab(1)">Description</a>
+					</li>
+					<li ng-class = "{active:panel.isSelected(2)}"> 
+						<a href ng-click="panel.selecttab(2)">Specifications</a>
+					</li>
+					<li ng-class = "{active:panel.isSelected(3)}"> 
+						<a href ng-click="panel.selecttab(3)">Reviews</a>
+					</li>
+				</ul>
+			
+				<div class = "panel" ng-show = "panel.isSelected(1)">
+					<h4> Description </h4>
+					<blockquote> {{product.desc}} </blockquote>
+				</div>	
+				<div class = "panel" ng-show = "panel.isSelected(2)">
+					<h4> Specification </h4>
+					<blockquote> {{product.spec}} </blockquote>
+				</div>
+				<div class = "panel" ng-show = "panel.isSelected(3)">
+					<h4> Reviews </h4>
+					<li ng-repeat = "review in product.rev">
+						<blockquote> 
+							<strong>{{review.stars}} Stars</strong>
+							{{review.body}}
+							<cite class="clearfix">— {{review.author}}</cite>
+						</blockquote>
+					</li>
+					
+					<form  name = "reviewForm" ng-controller = "ReviewController as reviewCtrl" ng-submit = "reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+						<blockquote> 
+							<strong>{{reviewCtrl.review.stars}} Stars</strong>
+							{{reviewCtrl.review.body}}
+							<cite class="clearfix">— {{reviewCtrl.review.author}}</cite>
+						</blockquote>
+						
+						<h4>Submit a Review</h4>
+						<fieldset class="form-group">
+							<select ng-model="reviewCtrl.review.stars" class="form-control"  ng-options="stars for stars in [5,4,3,2,1]"  title="Stars" required>
+								<option value="">Rate the Product</option>
+							</select>
+						</fieldset>
+						
+						<fieldset class="form-group">
+							<textarea ng-model="reviewCtrl.review.body" class="form-control"   placeholder="Write a short review of the product..." title="Review" required></textarea>
+						</fieldset>
+						 
+						<fieldset class="form-group"> 
+							<input ng-model="reviewCtrl.review.author" type="email" class="form-control"   placeholder="jimmyDean@example.org" title="Email" required />
+						</fieldset>
+						
+						<fieldset class="form-group">
+							<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+						</fieldset>
+						
+						{{reviewForm.$valid}}
+						
+					</form>
+						
+				</div>
+			
+			</section>
+	
+		 </div>
+		</div>
+		</div>
+	</body>
+</html>	
+

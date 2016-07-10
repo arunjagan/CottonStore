@@ -1,0 +1,76 @@
+/*body {
+    background-image: url("drop.jpg");
+	}*/
+	
+.displayed {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width:10%;
+	height:20%;
+}
+
+h1{
+	color : #000000;
+	font-weight: bold;
+	font-style: italic;
+	font-size: 40px;
+}
+
+.price{
+    position: relative;
+	font-weight: bold;
+	font-size: 40px;
+	left: 50%;
+    right: 50%;
+}
+
+.btn-small{
+	position: relative;
+	left: 50%;
+    right: 50%;
+}
+
+.menu{
+	color : #000000;
+	position: absolute;
+	cursor: pointer;
+	font-size : 20px;
+}
+
+.bottom{
+	position : absolute;
+}
+
+.home{
+	right: 28%;
+}
+
+.track{
+	right : 15%;
+}
+
+.login{
+	right : 5%;
+}
+
+.menu:hover{
+	text-decoration : underline;
+}
+
+.place{
+	background-color: #4CAF50;
+	color: white;
+	text-align: center;
+	position : absolute;
+	right : 20%;
+}
+
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+

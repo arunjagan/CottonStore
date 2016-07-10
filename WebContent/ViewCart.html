@@ -1,0 +1,68 @@
+
+
+	<div class="container">
+		<ul class="nav nav-pills">
+			<li ng-class = "{active:isSelected(1)}">
+				<a href ng-click="selecttab(1)">MY CART</a>
+			</li>
+			<li class="disabled" ng-class = "{active:isSelected(2)}">
+				<a href="#">ADDRESS</a>
+			</li>
+			<li class="disabled" ng-class = "{active:tab==3}">
+				<a href="#">PAYMENT</a>
+			</li>
+		</ul>
+		
+		<div class = "panel" ng-show="isSelected(1)">
+			<div class = "list-group" >
+				<div class = "list-group-item">
+		
+					<table style="width: auto;text-align:center;" class="table table-striped table-condensed" >
+		
+						<thead>
+							<tr>
+							<th style="min-width: 500px;text-align:center;">Item</th>
+							<th style="min-width: 100px;text-align:center;"> </th>
+							<th style="min-width: 100px;text-align:center;">Qty</th>
+							<th style="min-width: 100px;text-align:center;"> </th>
+							<th style="min-width: 100px;text-align:center;">Price</th>
+							<th style="min-width: 100px;text-align:center;">Subtotal</th>
+							<th style="min-width: 30px;text-align:center;"> </th>
+							<th style="min-width: 30px;text-align:center;"> </th>
+							</tr>
+						</thead>
+			
+						<tbody ng-show = "prod.length != 0">
+							<tr ng-repeat="x in prod">
+							<td>{{x.name}}</td>
+							<td><a ng-click="countChange(0)" class="btn btn-small btn-danger">-</a></td>
+							<td>{{count}}</td>
+							<td><a ng-click="countChange(1)" class="btn btn-small btn-danger">+</a></td>
+							<td>{{x.price}}</td>
+							<td>{{x.price}}</td>
+							<td><a ng-click="cancel()" class="btn btn-small btn-danger">Cancel</a></td>
+							</tr>
+						</tbody>
+    	
+					</table>
+				</div>
+			</div>
+			
+			<button class="btn place" ng-click="placeOrder()">PLACE ORDER >></button>
+		</div>
+		
+		<div class = "panel" ng-show="isSelected(2)">
+			<p> inside address </p>
+			<button class="btn place" ng-click="payment()">MAKE PAYMENT >></button>
+		</div>
+		
+		<div class = "panel" ng-show="isSelected(3)">
+			<p> inside payment </p>
+			
+		</div>
+		
+	</div>
+
+
+
+	
